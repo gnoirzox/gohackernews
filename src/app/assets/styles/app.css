@@ -21,7 +21,8 @@ h1, h2, h3 {
 }
 
 h1 {
-  color: #05afe7;
+  //color: #05afe7;
+  color: #000;
 }
 
 h2 {
@@ -78,7 +79,8 @@ code {
 
 .button, button, input[type="submit"], input[type="reset"], input[type="button"] {
   color: #fff;
-  background-color: #05afe7;
+  //background-color: #05afe7;
+  background-color: #000;
   border: none;
   font-size: 1em;
   font-weight: 300;
@@ -156,7 +158,8 @@ ul.inline li {
 
 header, footer {
   background-color: #ff6600;
-  background-color: #0ab1e8;
+  //background-color: #0ab1e8;
+  background-color: #000;
   border: none;
   margin:0;
   padding:0;
