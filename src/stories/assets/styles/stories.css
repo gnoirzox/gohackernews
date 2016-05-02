@@ -68,7 +68,7 @@ article .story {
 }
 
 .story .name {
-    color: #000;
+  color: #024;
 }
 
 .story .name:visited {
@@ -278,46 +278,53 @@ li.story .button {
 }
 
 @media (min-width: 770px) {
-    .story h1 .name {
-        display: inline;
-        font-size: 1em;
-    }
-    .story .register {
-        text-align: left;
-    }
-    .story .register .button {
-        display: inline-block;
-    }
-    .story .story_actions {
-        float: right;
-        margin: -4rem 0 0 0;
-    }
-    .story .actions .button {
-        margin: 0 0 0 1rem;
-    }
-    li.story {
-        height: 1.5em;
-        overflow: hidden;
-    }
-    li.story h3 {
-        display: inline;
-        font-size: 1.1em;
-    }
-    li.story .voting {
-        margin-top: 0;
-    }
-    li.story .vote {
-        padding: 0;
-    }
-    li.story .metadata {
-        display: inline;
-        font-size: 1em;
-    }
-    li.story .button {
-        display: block;
-        top: -0.1rem;
-    }
-    li.story .bubble {
-        top: -0.1rem;
-    }
+  .story h1 .name {
+    display: inline;
+    font-size: 1em;
+  }
+  
+  .story .register {
+    text-align:left;
+  }
+  .story .register .button {
+    display:inline-block;
+  }
+  
+  .story .actions {
+    float:right;
+  }
+
+  .story .actions .button {
+    margin:0 0 0 1rem;
+  }
+  
+  li.story {
+    height: 1.5em;
+    overflow: hidden;
+  }
+  li.story h3 {
+    display: inline;
+    font-size: 1.1em;
+  }
+  li.story .button {
+    display: block;
+  }
+  li.story .voting {
+    margin-top:0;
+  }
+  
+  li.story .vote {
+    padding:0;
+  }
+  
+  li.story .metadata {
+    display: inline;
+    font-size: 1em;
+  }
+  li.story .button {
+    top: 0.2rem;
+  }
+  li.story .bubble {
+    top: -0.1rem;
+  }
 }

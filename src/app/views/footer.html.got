@@ -1,5 +1,8 @@
 <p>
-  <a href="https://twitter.com/golangnews">Twitter</a> |
+  {{if .meta_rss }}
+  <a href="{{ .meta_rss }}">RSS</a> |
+  {{ end }}
+  <a href="https://twitter.com/cityh4ck3rs">Twitter</a> |
   <a href="https://github.com/kennygrant/gohackernews">Source on Github</a> | 
   <a href="http://fragmenta.eu">Made with Fragmenta</a> |
   <a href='javascript:window.location="https://golangnews.com/stories/create?u="+encodeURIComponent(document.location)+"&n="+encodeURIComponent(document.title)+"&s="+encodeURIComponent(document.querySelector("meta[name=description]").content)'>Bookmarklet (drag to bookmarks)</a>
@@ -8,5 +11,5 @@
       {{ end }}
 </p>
 <p>
-  This site uses <a href="https://golang.org">Go</a>, hosted on a $5 CoreOS instance on <a href="https://m.do.co/c/45dc49ca8623">Digital Ocean</a>. The golangnews.com domain was kindly donated by <a href="https://github.com/Unknwon">@Unknwon</a>. {{  .meta_foot }}.
+  This site uses <a href="https://nginx.com">Nginx</a>, <a href="https://golang.org">Golang</a> and is hosted on <a href="https://clever-cloud.com/">Clever Cloud</a>. This website is based on <a href="https://golangnews.com/">Golang-News's</a> <a href="https://github.com/kennygrant/gohackernews">source-code</a>.
 </p>

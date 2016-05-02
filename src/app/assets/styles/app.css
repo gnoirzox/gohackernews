@@ -33,7 +33,8 @@ h3 {
 }
 
 h1 {
-    color: #05afe7;
+  //color: #05afe7;
+  color: #000;
 }
 
 h2 {
@@ -101,20 +102,15 @@ code {
     text-align: center;
 }
 
-.button,
-button {
-    color: #fff;
-    background-color: #05afe7;
-    border: none;
-    border-radius: 0.25rem;
-    font-size: 1em;
-    font-weight: 300;
-    text-transform: uppercase;
-    line-height: 1.7rem;
-    padding: 0.3rem 0.6rem;
-    display: inline-block;
-    cursor: pointer;
-    letter-spacing: 0.1rem;
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+  color: #fff;
+  background-color: #000;
+  border: none;
+  font-size: 1em;
+  font-weight: 300;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0rem 1rem;
 }
 
 .button:hover,
@@ -185,13 +181,13 @@ ul.inline li {
     margin: 0 0 0.2rem 0;
 }
 
-header {
-    background-color: #ff6600;
-    background-color: #0ab1e8;
-    border: none;
-    margin: 0;
-    padding: 0;
-    color: #fff;
+header, footer {
+  background-color: #ff6600;
+  background-color: #000;
+  border: none;
+  margin:0;
+  padding:0;
+  color: #fff;
 }
 
 footer a {
