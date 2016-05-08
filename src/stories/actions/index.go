@@ -117,3 +117,24 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) error {
 	return view.Render()
 
 }
+
+func setStoriesMetadata(view *view.Renderer, request *http.Request) {
+	view.AddKey("pubdate", time.Now()) // could use latest story date instead?
+	view.AddKey("meta_title", "London TechCity News")
+	view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
+	view.AddKey("meta_keywords", "london news, blog, links, developers, apps, web applications, techcity, londonm, silicon roundabout")
+
+	p := strings.Replace(request.URL.Path, ".xml", "", 1)
+	if p == "/" {
+		p = "/index"
+	}
+
+	q := request.URL.RawQuery
+	if len(q) > 0 {
+		q = "?" + q
+	}
+
+	url := fmt.Sprintf("%s.xml%s", p, q)
+	view.AddKey("meta_rss", url)
+
+}
