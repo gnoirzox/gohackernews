@@ -163,9 +163,9 @@ func HandleIndex(context router.Context) error {
 
 func setStoriesMetadata(view *view.Renderer, request *http.Request) {
 	view.AddKey("pubdate", time.Now()) // could use latest story date instead?
-	view.AddKey("meta_title", "Golang News")
-	view.AddKey("meta_desc", "News for Go Hackers, in the style of Hacker News. A curated selection of the latest links about the Go programming language.")
-	view.AddKey("meta_keywords", "golang news, blog, links, go developers, go web apps, web applications, fragmenta")
+	view.AddKey("meta_title", "London TechCity News")
+	view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
+	view.AddKey("meta_keywords", "london news, blog, links, developers, apps, web applications, techcity, londonm, silicon roundabout")
 
 	p := strings.Replace(request.URL.Path, ".xml", "", 1)
 	if p == "/" {
