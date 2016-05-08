@@ -9,7 +9,7 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 const listLimit = 100
@@ -150,7 +150,7 @@ func HandleIndex(context router.Context) error {
 	setStoriesMetadata(view, context.Request())
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
-	view.AddKey("meta_title", "Golang News links")
+	view.AddKey("meta_title", "London TechCity News links")
 
 	if context.Param("format") == ".xml" {
 		view.Layout("")
