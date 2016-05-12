@@ -7,7 +7,6 @@ import (
 	"github.com/fragmenta/server"
 	"github.com/fragmenta/server/config"
 
-	//"github.com/kennygrant/gohackernews/src/app"
 	"github.com/gnoirzox/gohackernews/src/app"
 )
 
