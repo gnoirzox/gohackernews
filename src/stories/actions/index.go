@@ -8,7 +8,6 @@ import (
 
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
-
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 

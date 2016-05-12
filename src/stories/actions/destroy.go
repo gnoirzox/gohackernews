@@ -3,8 +3,8 @@ package storyactions
 import (
 	"github.com/fragmenta/router"
 
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleDestroy handles a DESTROY request for stories

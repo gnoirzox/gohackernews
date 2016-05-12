@@ -4,8 +4,8 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleShow displays a single story

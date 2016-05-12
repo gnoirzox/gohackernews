@@ -11,7 +11,7 @@ import (
 	"github.com/fragmenta/query"
 	"github.com/fragmenta/router"
 
-	"github.com/kennygrant/gohackernews/src/lib/status"
+	"github.com/gnoirzox/gohackernews/src/lib/status"
 )
 
 // Story handles saving and retreiving stories from the database
