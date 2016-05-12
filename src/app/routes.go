@@ -5,10 +5,10 @@ import (
 	"github.com/fragmenta/server/log"
 
 	// Resource Actions
-	"github.com/kennygrant/gohackernews/src/comments/actions"
-	"github.com/kennygrant/gohackernews/src/lib/session"
-	"github.com/kennygrant/gohackernews/src/stories/actions"
-	"github.com/kennygrant/gohackernews/src/users/actions"
+	"github.com/gnoirzox/gohackernews/src/comments/actions"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/stories/actions"
+	"github.com/gnoirzox/gohackernews/src/users/actions"
 )
 
 // SetupRoutes creates a new router and adds the routes for this app to it.

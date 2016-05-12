@@ -11,8 +11,8 @@ import (
 	"github.com/fragmenta/server/log"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/lib/session"
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleCreateShow serves the create form via GET for stories.

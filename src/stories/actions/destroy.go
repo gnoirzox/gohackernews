@@ -7,8 +7,8 @@ import (
 	"github.com/fragmenta/mux"
 	"github.com/fragmenta/server"
 
-	"github.com/kennygrant/gohackernews/src/lib/session"
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleDestroy responds to /stories/n/destroy by deleting the story.

@@ -10,10 +10,10 @@ import (
 	"github.com/fragmenta/server/config"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/lib/session"
-	"github.com/kennygrant/gohackernews/src/lib/status"
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/lib/status"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleShow displays a single story.

@@ -10,7 +10,6 @@ import (
 	"github.com/fragmenta/server"
 	"github.com/fragmenta/server/config"
 	"github.com/fragmenta/view"
-
 	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/lib/stats"
 	"github.com/gnoirzox/gohackernews/src/stories"
