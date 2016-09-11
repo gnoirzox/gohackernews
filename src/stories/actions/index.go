@@ -68,7 +68,6 @@ func HandleIndex(context router.Context) error {
 }
 
 func setStoriesMetadata(view *view.Renderer, request *http.Request) {
-	log.Printf("proute")
 	view.AddKey("pubdate", time.Now()) // could use latest story date instead?
 	view.AddKey("meta_title", "London TechCity News")
 	view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
