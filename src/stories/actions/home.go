@@ -35,6 +35,7 @@ func HandleHome(context router.Context) error {
 	setStoriesMetadata(view, context.Request())
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
+	view.AddKey("meta_title", "London TechCity News")
 	view.Template("stories/views/index.html.got")
 
 	if context.Param("format") == ".xml" {

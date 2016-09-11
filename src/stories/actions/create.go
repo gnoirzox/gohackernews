@@ -25,7 +25,7 @@ func HandleCreateShow(context router.Context) error {
 	view := view.New(context)
 	story := stories.New()
 	view.AddKey("story", story)
-	view.AddKey("meta_title", "Go Hacker News Submit")
+	view.AddKey("meta_title", "TechCity News Submit")
 
 	return view.Render()
 }

@@ -15,15 +15,11 @@ import (
 	"github.com/fragmenta/view"
 	"github.com/fragmenta/view/helpers"
 
-<<<<<<< HEAD
-	"github.com/gnoirzox/gohackernews/src/lib/authorise"
-=======
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
 	"github.com/kennygrant/gohackernews/src/lib/mail"
 	"github.com/kennygrant/gohackernews/src/lib/twitter"
 	"github.com/kennygrant/gohackernews/src/stories/actions"
 	"github.com/kennygrant/gohackernews/src/users/actions"
->>>>>>> c1c2829f388ce55b9ce495ae8ba4be8391df3065
 )
 
 // appAssets holds a reference to our assets for use in asset setup

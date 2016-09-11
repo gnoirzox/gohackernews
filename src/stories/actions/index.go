@@ -57,10 +57,6 @@ func HandleIndex(context router.Context) error {
 	setStoriesMetadata(view, context.Request())
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
-<<<<<<< HEAD
-	view.AddKey("meta_title", "London TechCity News links")
-=======
->>>>>>> c1c2829f388ce55b9ce495ae8ba4be8391df3065
 
 	if context.Param("format") == ".xml" {
 		view.Layout("")
@@ -72,6 +68,7 @@ func HandleIndex(context router.Context) error {
 }
 
 func setStoriesMetadata(view *view.Renderer, request *http.Request) {
+	log.Printf("proute")
 	view.AddKey("pubdate", time.Now()) // could use latest story date instead?
 	view.AddKey("meta_title", "London TechCity News")
 	view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
