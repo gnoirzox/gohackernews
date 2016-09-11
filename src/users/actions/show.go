@@ -4,9 +4,9 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/stories"
-	"github.com/kennygrant/gohackernews/src/users"
+	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleShow serve a get request at /users/1

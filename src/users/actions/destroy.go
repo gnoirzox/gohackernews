@@ -4,7 +4,8 @@ import (
 	"github.com/fragmenta/router"
 
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleDestroy responds to POST /users/1/destroy

@@ -8,7 +8,8 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleLoginShow shows the page at /users/login

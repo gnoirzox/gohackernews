@@ -6,7 +6,8 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/stories"
+
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleUpvoted displays a list of stories the user has upvoted in the past

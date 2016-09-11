@@ -7,8 +7,9 @@ import (
 	"github.com/fragmenta/server/schedule"
 
 	"github.com/kennygrant/gohackernews/src/lib/mail"
-	"github.com/kennygrant/gohackernews/src/stories"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // DailyEmail sends a daily email to subscribed users with top stories - change this to WeeklyEmail

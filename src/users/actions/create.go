@@ -8,7 +8,8 @@ import (
 
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
 	"github.com/kennygrant/gohackernews/src/lib/status"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleCreateShow handles GET /users/create

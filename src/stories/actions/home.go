@@ -4,7 +4,7 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleHome displays a list of stories using gravity to order them

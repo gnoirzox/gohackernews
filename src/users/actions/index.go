@@ -5,7 +5,8 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleIndex serves a GET request at /users

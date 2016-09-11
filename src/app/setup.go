@@ -18,8 +18,9 @@ import (
 	"github.com/kennygrant/gohackernews/src/lib/authorise"
 	"github.com/kennygrant/gohackernews/src/lib/mail"
 	"github.com/kennygrant/gohackernews/src/lib/twitter"
-	"github.com/kennygrant/gohackernews/src/stories/actions"
-	"github.com/kennygrant/gohackernews/src/users/actions"
+
+	"github.com/gnoirzox/gohackernews/src/stories/actions"
+	"github.com/gnoirzox/gohackernews/src/users/actions"
 )
 
 // appAssets holds a reference to our assets for use in asset setup
