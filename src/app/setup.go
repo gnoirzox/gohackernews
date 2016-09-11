@@ -15,6 +15,10 @@ import (
 	"github.com/fragmenta/view/helpers"
 
 	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/mail"
+	"github.com/gnoirzox/gohackernews/src/lib/twitter"
+	"github.com/gnoirzox/gohackernews/src/stories/actions"
+	"github.com/gnoirzox/gohackernews/src/users/actions"
 )
 
 // appAssets holds a reference to our assets for use in asset setup

@@ -43,6 +43,7 @@ func HandleCreateShow(w http.ResponseWriter, r *http.Request) error {
 	view.AddKey("story", story)
 	view.AddKey("hideSubmit", true)
 	view.AddKey("currentUser", currentUser)
+	view.AddKey("meta_title", "TechCity News Submit")
 	return view.Render()
 }
 

@@ -49,6 +49,7 @@ func HandleHome(w http.ResponseWriter, r *http.Request) error {
 	view := view.NewRenderer(w, r)
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
+	view.AddKey("meta_title", "London TechCity News")
 	view.Template("stories/views/index.html.got")
 	view.AddKey("pubdate", storiesModTime(results))
 	view.AddKey("meta_title", fmt.Sprintf("%s - %s", config.Get("meta_title"), config.Get("meta_desc")))
