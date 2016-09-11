@@ -7,8 +7,8 @@ import (
 	"github.com/fragmenta/server"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 )
 
 // HandleIndex displays a list of comments.

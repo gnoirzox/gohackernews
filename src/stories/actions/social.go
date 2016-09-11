@@ -10,7 +10,8 @@ import (
 	"github.com/fragmenta/server/log"
 
 	"github.com/kennygrant/gohackernews/src/lib/twitter"
-	"github.com/kennygrant/gohackernews/src/stories"
+
+	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // TweetTopStory tweets the top story

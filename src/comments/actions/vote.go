@@ -10,10 +10,11 @@ import (
 	"github.com/fragmenta/query"
 	"github.com/fragmenta/server"
 
-	"github.com/kennygrant/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/lib/session"
-	"github.com/kennygrant/gohackernews/src/stories"
-	"github.com/kennygrant/gohackernews/src/users"
+	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/stories"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleFlag handles POST to /comments/123/flag

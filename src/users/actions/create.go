@@ -13,7 +13,8 @@ import (
 
 	"github.com/kennygrant/gohackernews/src/lib/session"
 	"github.com/kennygrant/gohackernews/src/lib/status"
-	"github.com/kennygrant/gohackernews/src/users"
+
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // HandleCreateShow serves the create form via GET for users.
