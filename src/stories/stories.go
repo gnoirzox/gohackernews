@@ -36,7 +36,7 @@ func AllowedParams() []string {
 
 // AllowedParamsAdmin returns an array of allowed param keys
 func AllowedParamsAdmin() []string {
-	return []string{"status", "user_id", "user_name", "name", "points", "summary", "url", "comment_count"}
+	return []string{"status", "user_id", "user_name", "name", "points", "summary", "url", "comment_count", "tweeted_at", "newsletter_at"}
 }
 
 // NewWithColumns creates a new story instance and fills it with data from the database cols provided
@@ -156,6 +156,11 @@ func Published() *query.Query {
 	return Query().Where("status>=?", status.Published)
 }
 
+// Popular returns a query for all stories with points over a certain threshold
+func Popular() *query.Query {
+	return Query().Where("points > 2")
+}
+
 // Update sets the record in the database from params
 func (m *Story) Update(params map[string]string) error {
 
@@ -211,12 +216,20 @@ func (m *Story) DestinationURL() string {
 	return m.URLShow()
 }
 
-// ListURL returns the URL to use for this story in lists for Show/Ask stories, this is the story link, for others, it is the destination URL
-func (m *Story) ListURL() string {
-	if !m.ShowAsk() && m.Url != "" {
-		return m.Url
+// PrimaryURL returns the URL to use for this story in lists
+// Videos and Show Ask stories link to the story, for other links for now it is the destination
+func (m *Story) PrimaryURL() string {
+	// If video or show or ask, return story url
+	if m.YouTube() || m.ShowAsk() {
+		return m.URLShow()
 	}
-	return m.URLShow()
+
+	// If no url, return url show
+	if m.Url == "" {
+		return m.URLShow()
+	}
+
+	return m.Url
 }
 
 // Code returns true if this is a link to a git repository
@@ -245,6 +258,20 @@ func (m *Story) VetURL() string {
 		return strings.Replace(m.Url, "https://github.com/", "http://goreportcard.com/report/", 1)
 	}
 	return ""
+}
+
+// YouTube returns true if this is a youtube video
+func (m *Story) YouTube() bool {
+	return strings.Contains(m.Url, "youtube.com/watch?v=")
+}
+
+// YouTubeURL returns the youtube URL
+func (m *Story) YouTubeURL() string {
+	url := strings.Replace(m.Url, "https://m.youtube.com", "https://www.youtube.com", 1)
+	// https://www.youtube.com/watch?v=sZx3oZt7LVg ->
+	// https://www.youtube.com/embed/sZx3oZt7LVg
+	url = strings.Replace(url, "watch?v=", "embed/", 1)
+	return url
 }
 
 // CommentCountDisplay returns the comment count or ellipsis if count is 0

@@ -5,6 +5,12 @@
   margin:0;
 }
 
+article .story {
+  background-color: #fefefe;
+  padding: 2rem;
+}
+
+
 .story form .field {
   clear: both;
   display: block;
@@ -67,6 +73,21 @@
 
 .story .tags {
     display:inline;
+}
+
+.story .video-player {
+    position: relative;
+  	padding-bottom: 56.25%; /* 16:9 */
+  	padding-top: 25px;
+  	height: 0;
+}
+
+.story .video-player iframe {
+    position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
 }
 
 .tags {
@@ -150,13 +171,13 @@ li.story {
   line-height: 1.5em;
   padding: 0.5rem 1rem;
   margin: 0;
-  border-top: 1px solid #fff;
+  border-top: 1px solid #f6f6ef;
   list-style:none;
   overflow:hidden;
 }
 
 li.story:hover {
-  background-color: #eeeee6;
+  background-color: #eee;
 }
 
 li.story .points {
