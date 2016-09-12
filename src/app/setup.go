@@ -15,10 +15,9 @@ import (
 	"github.com/fragmenta/view"
 	"github.com/fragmenta/view/helpers"
 
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
-	"github.com/kennygrant/gohackernews/src/lib/mail"
-	"github.com/kennygrant/gohackernews/src/lib/twitter"
-
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/mail"
+	"github.com/gnoirzox/gohackernews/src/lib/twitter"
 	"github.com/gnoirzox/gohackernews/src/stories/actions"
 	"github.com/gnoirzox/gohackernews/src/users/actions"
 )

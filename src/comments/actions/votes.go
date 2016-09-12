@@ -7,9 +7,8 @@ import (
 	"github.com/fragmenta/router"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
 	"github.com/gnoirzox/gohackernews/src/users"
-
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
 )
 
 // HandleFlag handles POST to /comments/123/flag

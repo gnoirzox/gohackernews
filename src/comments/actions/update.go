@@ -5,7 +5,7 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
 )
 
 // HandleUpdateShow responds to GET /comments/update with the form to update a comment

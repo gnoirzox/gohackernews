@@ -7,9 +7,8 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
 	"github.com/gnoirzox/gohackernews/src/stories"
-
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
 )
 
 // HandleCreateShow serves the create form via GET for comments

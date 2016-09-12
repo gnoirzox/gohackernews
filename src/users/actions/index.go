@@ -4,8 +4,7 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/lib/authorise"
-
+	"github.com/gnoirzox/gohackernews/src/lib/authorise"
 	"github.com/gnoirzox/gohackernews/src/users"
 )
 

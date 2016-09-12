@@ -8,9 +8,8 @@ import (
 	"github.com/fragmenta/query"
 	"github.com/fragmenta/server/schedule"
 
-	"github.com/kennygrant/gohackernews/src/lib/facebook"
-	"github.com/kennygrant/gohackernews/src/lib/twitter"
-
+	"github.com/gnoirzox/gohackernews/src/lib/facebook"
+	"github.com/gnoirzox/gohackernews/src/lib/twitter"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
