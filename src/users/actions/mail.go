@@ -6,8 +6,7 @@ import (
 	"github.com/fragmenta/query"
 	"github.com/fragmenta/server/schedule"
 
-	"github.com/kennygrant/gohackernews/src/lib/mail"
-
+	"github.com/gnoirzox/gohackernews/src/lib/mail"
 	"github.com/gnoirzox/gohackernews/src/stories"
 	"github.com/gnoirzox/gohackernews/src/users"
 )

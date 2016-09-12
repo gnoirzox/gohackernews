@@ -9,7 +9,7 @@ import (
 	"github.com/fragmenta/server/config"
 	"github.com/fragmenta/server/log"
 
-	"github.com/kennygrant/gohackernews/src/lib/twitter"
+	"github.com/gnoirzox/gohackernews/src/lib/twitter"
 
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
