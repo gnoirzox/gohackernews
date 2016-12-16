@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/fragmenta/view"
-	"github.com/sendgrid/sendgrid-go"
+	sendgrid "github.com/sendgrid/sendgrid-go"
 )
 
 // The Mail service secret key/password (must be set before first sending)
