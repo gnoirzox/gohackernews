@@ -2,7 +2,6 @@ package storyactions
 
 import (
 	"fmt"
-	"net/http"
 	"strings"
 	"time"
 
@@ -51,12 +50,21 @@ func HandleIndex(context router.Context) error {
 		return router.InternalError(err)
 	}
 
+	windowTitle := context.Config("meta_title")
+	switch filter {
+	case "Video:":
+		windowTitle = "Golang Videos"
+	}
+
 	// Render the template
 	view := view.New(context)
-
-	setStoriesMetadata(view, context.Request())
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
+	view.AddKey("pubdate", storiesModTime(results))
+	view.AddKey("meta_title", windowTitle)
+	view.AddKey("meta_desc", context.Config("meta_desc"))
+	view.AddKey("meta_keywords", context.Config("meta_keywords"))
+	view.AddKey("meta_rss", storiesXMLPath(context))
 
 	if context.Param("format") == ".xml" {
 		view.Layout("")
@@ -67,11 +75,27 @@ func HandleIndex(context router.Context) error {
 
 }
 
-func setStoriesMetadata(view *view.Renderer, request *http.Request) {
-	view.AddKey("pubdate", time.Now()) // could use latest story date instead?
-	view.AddKey("meta_title", "London TechCity News")
-	view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
-	view.AddKey("meta_keywords", "london news, blog, links, developers, apps, web applications, techcity, londonm, silicon roundabout")
+/*func setStoriesMetadata(view *view.Renderer, request *http.Request) {
+view.AddKey("pubdate", time.Now()) // could use latest story date instead?
+view.AddKey("meta_title", "London TechCity News")
+view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
+view.AddKey("meta_keywords", "london news, blog, links, developers, apps, web applications, techcity, london, silicon roundabout")
+*/
+
+// storiesModTime returns the mod time of the first story, or current time if no stories
+func storiesModTime(availableStories []*stories.Story) time.Time {
+	if len(availableStories) == 0 {
+		return time.Now()
+	}
+	story := availableStories[0]
+
+	return story.UpdatedAt
+}
+
+// storiesXMLPath returns the xml path for a given request to a stories link
+func storiesXMLPath(context router.Context) string {
+
+	request := context.Request()
 
 	p := strings.Replace(request.URL.Path, ".xml", "", 1)
 	if p == "/" {
@@ -83,7 +107,5 @@ func setStoriesMetadata(view *view.Renderer, request *http.Request) {
 		q = "?" + q
 	}
 
-	url := fmt.Sprintf("%s.xml%s", p, q)
-	view.AddKey("meta_rss", url)
-
+	return fmt.Sprintf("%s.xml%s", p, q)
 }

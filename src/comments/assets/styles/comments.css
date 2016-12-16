@@ -22,12 +22,22 @@ article.comments {
   margin-left: 1rem;
 }
 
+.comment_guidelines_link {
+  margin-right:1rem;
+  font-size:1.5rem;
+}
+
 .story .comment .metadata {
   margin-bottom: 0;
 }
 
 .comment .metadata .vote {
   font-size: 0.8em;
+}
+
+.comment .reply-form {
+  clear:both;
+  margin-top:4rem;
 }
 
 .comment .button {

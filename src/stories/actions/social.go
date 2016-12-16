@@ -38,64 +38,48 @@ func TweetTopStory(context schedule.Context) {
 	if len(results) > 0 {
 		story := results[0]
 
-		// Link to the primary url for this type of story
-		url := story.PrimaryURL()
-
-		if strings.HasPrefix(url, "/") {
-			url = "https://golangnews.com" + url
-		}
-
-		tweet := fmt.Sprintf("%s #golang %s", story.Name, url)
-
-		context.Logf("#info sending tweet:%s", tweet)
-
-		_, err := twitter.Tweet(tweet)
-		if err != nil {
-			context.Logf("#error tweeting top story %s", err)
-			return
-		}
-
-		// Record that this story has been tweeted in db
-		params := map[string]string{"tweeted_at": query.TimeString(time.Now().UTC())}
-		err = story.Update(params)
-		if err != nil {
-			context.Logf("#error updating top story tweet %s", err)
-			return
-		}
+		TweetStory(context, story)
 	} else {
 		context.Logf("#warn no top story found for tweet")
 	}
 
 }
 
-// FacebookPostTopStory facebook posts the top story
-func FacebookPostTopStory(context schedule.Context) {
-	context.Log("#info posting top story facebook")
+// TweetStory tweets the given story
+func TweetStory(context schedule.Context, story *stories.Story) {
 
-	// Get the top story
-	q := stories.Popular().Limit(1).Order("rank desc, points desc, id desc")
+	// Base url from config
+	baseURL := context.Config("root_url")
 
-	// Don't fetch old stories
-	q.Where("created_at > current_timestamp - interval '6 hours'")
+	// Link to the primary url for this type of story
+	url := story.PrimaryURL()
 
-	// Fetch the story
-	results, err := stories.FindAll(q)
+	// Check for relative urls
+	if strings.HasPrefix(url, "/") {
+		url = baseURL + url
+	}
+
+	tweet := fmt.Sprintf("%s #golang %s", story.Name, url)
+
+	// If the tweet will be too long for twitter, use GN url
+	if len(tweet) > 140 {
+		tweet = fmt.Sprintf("%s #golang %s", story.Name, baseURL+story.URLShow())
+	}
+
+	context.Logf("#info sending tweet:%s", tweet)
+
+	_, err := twitter.Tweet(tweet)
 	if err != nil {
-		context.Logf("#error getting top story for fb %s", err)
+		context.Logf("#error tweeting top story %s", err)
 		return
 	}
 
-	if len(results) > 0 {
-		story := results[0]
-		context.Logf("#info facebook posting %s", story.Name)
-		err := facebook.Post(story.Name, story.Url)
-		if err != nil {
-			context.Logf("#error facebook post top story %s", err)
-			return
-		}
-		// Do not record fb posts - this could lead to duplicates...
-		// we should perhaps have a join table for social media posts, rather than dates on stories?
-	} else {
-		context.Logf("#warn no top story found for fb")
+	// Record that this story has been tweeted in db
+	params := map[string]string{"tweeted_at": query.TimeString(time.Now().UTC())}
+	err = story.Update(params)
+	if err != nil {
+		context.Logf("#error updating top story tweet %s", err)
+		return
 	}
+
 }

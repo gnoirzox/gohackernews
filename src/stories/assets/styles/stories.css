@@ -6,7 +6,6 @@
 }
 
 article .story {
-  background-color: #fefefe;
   padding: 2rem;
 }
 
@@ -73,6 +72,20 @@ article .story {
 
 .story .tags {
     display:inline;
+}
+
+
+.story .summary ul {
+  margin:1rem 0 1rem 0;
+}
+
+.story .summary h5 + ul {
+  margin:0 0 1rem 0;
+}
+
+
+.story .summary ul li {
+
 }
 
 .story .video-player {
@@ -192,6 +205,7 @@ li.story h3 {
   overflow: hidden;
 }
 
+
 li.story .voting {
   float:left;
   padding-right:0.5rem;
@@ -277,8 +291,9 @@ li.story .button {
     display:inline-block;
   }
   
-  .story .actions {
+  .story .story_actions {
     float:right;
+    margin:-4rem 0 0 0;
   }
 
   .story .actions .button {
