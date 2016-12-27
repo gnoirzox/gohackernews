@@ -75,13 +75,6 @@ func HandleIndex(context router.Context) error {
 
 }
 
-/*func setStoriesMetadata(view *view.Renderer, request *http.Request) {
-view.AddKey("pubdate", time.Now()) // could use latest story date instead?
-view.AddKey("meta_title", "London TechCity News")
-view.AddKey("meta_desc", "News for the London Tech Scene, in the style of Hacker News. A curated selection of the latest links about the London TechCity")
-view.AddKey("meta_keywords", "london news, blog, links, developers, apps, web applications, techcity, london, silicon roundabout")
-*/
-
 // storiesModTime returns the mod time of the first story, or current time if no stories
 func storiesModTime(availableStories []*stories.Story) time.Time {
 	if len(availableStories) == 0 {
