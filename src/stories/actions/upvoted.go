@@ -6,11 +6,13 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/stats"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
 // HandleUpvoted displays a list of stories the user has upvoted in the past
 func HandleUpvoted(context router.Context) error {
+	stats.RegisterHit(context)
 
 	// Build a query
 	q := stories.Query().Limit(listLimit)

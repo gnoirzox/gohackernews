@@ -3,6 +3,7 @@ package app
 import (
 	"github.com/fragmenta/router"
 	"github.com/gnoirzox/gohackernews/src/comments/actions"
+	"github.com/gnoirzox/gohackernews/src/lib/stats"
 	"github.com/gnoirzox/gohackernews/src/stories/actions"
 	"github.com/gnoirzox/gohackernews/src/users/actions"
 )
@@ -29,6 +30,7 @@ func setupRoutes(r *router.Router) {
 	r.Add("/stories/{id:[0-9]+}/flag", storyactions.HandleFlag).Post()
 	r.Add("/stories/{id:[0-9]+}", storyactions.HandleShow)
 	r.Add("/stories{format:(.xml)?}", storyactions.HandleIndex)
+	r.Add("/sitemap.xml", storyactions.HandleSiteMap)
 
 	r.Add("/comments", commentactions.HandleIndex)
 	r.Add("/comments/create", commentactions.HandleCreateShow)
@@ -48,9 +50,12 @@ func setupRoutes(r *router.Router) {
 	r.Add("/users/{id:[0-9]+}/update", useractions.HandleUpdate).Post()
 	r.Add("/users/{id:[0-9]+}/destroy", useractions.HandleDestroy).Post()
 	r.Add("/users/{id:[0-9]+}", useractions.HandleShow)
+	r.Add("/u/{name:.*}", useractions.HandleShowName)
 	r.Add("/users/login", useractions.HandleLoginShow)
 	r.Add("/users/login", useractions.HandleLogin).Post()
 	r.Add("/users/logout", useractions.HandleLogout).Post()
+
+	r.Add("/stats/users/count", stats.HandleUserCount)
 
 	// Add a files route to handle static images under files
 	// - nginx deals with this in production - perhaps only do this in dev?

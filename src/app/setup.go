@@ -3,7 +3,6 @@ package app
 import (
 	"fmt"
 	"html/template"
-	"strings"
 	"time"
 
 	"github.com/fragmenta/assets"
@@ -17,6 +16,7 @@ import (
 
 	"github.com/gnoirzox/gohackernews/src/lib/authorise"
 	"github.com/gnoirzox/gohackernews/src/lib/mail"
+	"github.com/gnoirzox/gohackernews/src/lib/text"
 	"github.com/gnoirzox/gohackernews/src/lib/twitter"
 	"github.com/gnoirzox/gohackernews/src/stories/actions"
 	"github.com/gnoirzox/gohackernews/src/users/actions"
@@ -143,6 +143,9 @@ func setupView(server *server.Server) {
 	// instead and offer proper editing TODO: move to editable.js instead
 	view.Helpers["markup"] = markup
 	view.Helpers["timeago"] = timeago
+	view.Helpers["root_url"] = func() string {
+		return server.Config("root_url")
+	}
 
 	view.Production = server.Production()
 	err := view.LoadTemplates()
@@ -153,8 +156,12 @@ func setupView(server *server.Server) {
 }
 
 func markup(s string) template.HTML {
-	// Nasty find/replace
-	s = strings.Replace(s, "\n", "</p><p>", -1)
+
+	// Convert bare links and usernames to anchors
+	s = text.ConvertLinks(s)
+
+	// Convert newlimnes to paragraph tags
+	s = text.ConvertNewlines(s)
 
 	return helpers.Sanitize(s)
 }
@@ -195,6 +202,17 @@ func setupDatabase(server *server.Server) {
 		"user":     config["db_user"],
 		"password": config["db_pass"],
 		"db":       config["db"],
+	}
+
+	// Optionally Support remote databases
+	if len(config["db_host"]) > 0 {
+		options["host"] = config["db_host"]
+	}
+	if len(config["db_port"]) > 0 {
+		options["port"] = config["db_port"]
+	}
+	if len(config["db_params"]) > 0 {
+		options["params"] = config["db_params"]
 	}
 
 	// Ask query to open the database

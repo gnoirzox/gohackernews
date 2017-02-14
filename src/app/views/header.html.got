@@ -1,20 +1,21 @@
 <nav alt="CityHackers- Curated links about the London TechCity">
   <ul class="title">
-    
-    <li class="user_badge">
+  
+    <li class="user_badge" >
       {{ if not .current_user.Anon }}
-        <a href="/users/{{.current_user.Id}}">{{.current_user.Name}} ({{.current_user.Points}})</a>
+        <a href="/users/{{.current_user.Id}}">{{.current_user.Name}} ({{.current_user.Points}}) {{ if .userCount}} - {{.userCount}} users online{{end}}</a>
       {{ else }}
-        <span class="short">CityHackers News</span>
-        <span class="long">Curated links and news about the London TechCity</span>
+        <span class="hidden">CityHackers News, Curated links and news about the London TechCity</span>
+        <span class="short">CityHackers News {{ if .userCount}}- {{.userCount}} users online{{end}}</span>
+        <span class="long">Curated links and news about the London TechCity {{ if .userCount}} - {{.userCount}} users online{{end}}</span>
       {{ end }}
     </li>
         
-      <!-- change to http://golangnews.com -->
     <li class="site">
-      <a href="http://techcitynews.com" title="CityHackers - Curated links about the London TechCity">
+      <a href="{{root_url}}" title="CityHackers - Curated links about the London TechCity">
         <span class=" logo">CH</span>
       </a>
+      
     </li>
 
     <li class="search">
@@ -51,6 +52,9 @@
     <li class="submit"><a class="register" href="/users/create">Sign up</a></li>
     <li class="submit"><a class="register" href="/users/login">Log in</a></li>
     {{ end }}
+    
+    
+    
   </ul>
   
   {{ if .tags }}

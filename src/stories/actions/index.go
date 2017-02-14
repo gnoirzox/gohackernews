@@ -7,6 +7,7 @@ import (
 
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
+	"github.com/gnoirzox/gohackernews/src/lib/stats"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
@@ -14,6 +15,7 @@ const listLimit = 100
 
 // HandleIndex displays a list of stories at /stories
 func HandleIndex(context router.Context) error {
+	stats.RegisterHit(context)
 
 	// Build a query
 	q := stories.Query().Limit(listLimit)

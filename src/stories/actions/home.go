@@ -6,6 +6,7 @@ import (
 	"github.com/fragmenta/router"
 	"github.com/fragmenta/view"
 
+	"github.com/gnoirzox/gohackernews/src/lib/stats"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
@@ -13,6 +14,7 @@ import (
 // used for the home page for gravity rank see votes.go
 // responds to GET /
 func HandleHome(context router.Context) error {
+	stats.RegisterHit(context)
 
 	// Build a query
 	q := stories.Query().Limit(listLimit)
@@ -43,7 +45,9 @@ func HandleHome(context router.Context) error {
 	view.AddKey("meta_keywords", context.Config("meta_keywords"))
 	view.AddKey("meta_rss", storiesXMLPath(context))
 	view.Template("stories/views/index.html.got")
+	view.AddKey("userCount", stats.UserCount())
 
+	// For rss feeds use xml templates
 	if context.Param("format") == ".xml" {
 		view.Layout("")
 		view.Template("stories/views/index.xml.got")
