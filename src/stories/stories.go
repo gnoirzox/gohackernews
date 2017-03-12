@@ -252,22 +252,6 @@ func (m *Story) Code() bool {
 	return false
 }
 
-// GodocURL returns the godoc.org URL for this story, or empty string if none
-func (m *Story) GodocURL() string {
-	if m.Code() {
-		return strings.Replace(m.Url, "https://github.com", "https://godoc.org/github.com", 1)
-	}
-	return ""
-}
-
-// VetURL returns a URL for goreportcard.com, for code repos
-func (m *Story) VetURL() string {
-	if m.Code() {
-		return strings.Replace(m.Url, "https://github.com/", "http://goreportcard.com/report/", 1)
-	}
-	return ""
-}
-
 // YouTube returns true if this is a youtube video
 func (m *Story) YouTube() bool {
 	return strings.Contains(m.Url, "youtube.com/watch?v=")

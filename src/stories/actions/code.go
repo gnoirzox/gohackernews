@@ -47,5 +47,4 @@ func HandleCode(context router.Context) error {
 	}
 
 	return view.Render()
-
 }
