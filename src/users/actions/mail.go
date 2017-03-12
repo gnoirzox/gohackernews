@@ -69,5 +69,4 @@ func DailyEmail(context schedule.Context) {
 		context.Logf("#error updating top story newsletter_at %s", err)
 		return
 	}
-
 }

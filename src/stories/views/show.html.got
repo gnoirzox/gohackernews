@@ -12,14 +12,8 @@
                  <li><a href="/stories?q=%23{{.}}">{{.}}</a></li>
                {{ end }}
            </ul>
-             <a href="{{.story.DestinationURL}}" class="domain">{{ .story.Domain }}</a>
-             {{ if exists .story.GodocURL }}
-               <a href="{{.story.GodocURL}}" class="domain docs">godoc.org</a>
-             {{ end }}
-             {{ if exists .story.VetURL }}
-               <a href="{{.story.VetURL}}" class="domain docs">goreportcard.com</a>
-             {{ end }}
-             <a href="/users/{{.story.UserID}}">posted by {{.story.UserName}}</a> {{timeago .story.CreatedAt }} &nbsp; 
+             <a href="{{.story.Url}}" class="domain">{{ .story.Domain }}</a>
+             <a href="/users/{{.story.UserId}}">posted by {{.story.UserName}}</a> {{timeago .story.CreatedAt }} &nbsp; 
          </div>
          
          <div class="actions story_actions">
