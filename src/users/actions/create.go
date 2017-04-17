@@ -1,102 +1,150 @@
 package useractions
 
 import (
-	"strings"
+	"fmt"
+	"net/http"
 
-	"github.com/fragmenta/router"
+	"github.com/fragmenta/auth"
+	"github.com/fragmenta/auth/can"
+	"github.com/fragmenta/mux"
+	"github.com/fragmenta/server"
+	"github.com/fragmenta/server/log"
 	"github.com/fragmenta/view"
 
-	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/lib/status"
 	"github.com/gnoirzox/gohackernews/src/users"
 )
 
-// HandleCreateShow handles GET /users/create
-func HandleCreateShow(context router.Context) error {
+// HandleCreateShow serves the create form via GET for users.
+func HandleCreateShow(w http.ResponseWriter, r *http.Request) error {
 
-	// No auth as anyone can create users in this app
-
-	// Setup
-	view := view.New(context)
 	user := users.New()
-	view.AddKey("user", user)
 
-	// Serve
+	// Authorise
+	err := can.Create(user, session.CurrentUser(w, r))
+	if err != nil {
+		return server.NotAuthorizedError(err)
+	}
+
+	// Check they're not logged in already if so redirect.
+	if !session.CurrentUser(w, r).Anon() {
+		return server.Redirect(w, r, "/?warn=already_logged_in")
+	}
+
+	params, err := mux.Params(r)
+	if err != nil {
+		return server.InternalError(err)
+	}
+
+	// Render the template
+	view := view.NewRenderer(w, r)
+	view.AddKey("user", user)
+	view.AddKey("hideSubmit", true)
+	view.AddKey("error", params.Get("error"))
 	return view.Render()
 }
 
-// HandleCreate handles POST /users/create from the register page
-func HandleCreate(context router.Context) error {
+// HandleCreate handles the POST of the create form for users
+func HandleCreate(w http.ResponseWriter, r *http.Request) error {
 
-	// Check csrf token
-	err := authorise.AuthenticityToken(context)
+	user := users.New()
+
+	// Check the authenticity token
+	err := session.CheckAuthenticity(w, r)
 	if err != nil {
-		return router.NotAuthorizedError(err)
+		return err
 	}
 
-	// Setup context
-	params, err := context.Params()
+	// Authorise
+	err = can.Create(user, session.CurrentUser(w, r))
 	if err != nil {
-		return router.InternalError(err)
+		return server.NotAuthorizedError(err)
 	}
 
-	// Check for email duplicates
-	email := params.Get("email")
-	if len(email) > 0 {
-
-		if len(email) < 3 || !strings.Contains(email, "@") {
-			return router.InternalError(err, "Invalid email", "Please just miss out the email field, or use a valid email.")
-		}
-
-		count, err := users.Query().Where("email=?", email).Count()
-		if err != nil {
-			return router.InternalError(err)
-		}
-		if count > 0 {
-			return router.NotAuthorizedError(err, "User already exists", "Sorry, a user already exists with that email.")
-		}
+	// Check they're not logged in already if so redirect.
+	if !session.CurrentUser(w, r).Anon() {
+		return server.Redirect(w, r, "/?warn=already_logged_in")
 	}
 
-	// Check for invalid or duplicate names
+	params, err := mux.Params(r)
+	if err != nil {
+		return server.InternalError(err)
+	}
+
+	// Check a user doesn't exist with this name or email already
 	name := params.Get("name")
+	email := params.Get("email")
+	pass := params.Get("password")
+
+	// Name must be at least 2 characters
 	if len(name) < 2 {
-		return router.InternalError(err, "Name too short", "Please choose a username longer than 2 characters")
+		return server.InternalError(err, "Name too short", "Sorry, names must be at least 2 characters long")
 	}
 
-	count, err := users.Query().Where("name=?", name).Count()
+	// Password must be at least 6 characters
+	if len(pass) < 6 {
+		return server.InternalError(err, "Password too short", "Sorry, passwords must be at least 6 characters long")
+	}
+
+	// Name is not optional so always check duplicates
+	duplicates, err := users.FindAll(users.Where("name=?", name))
 	if err != nil {
-		return router.InternalError(err)
+		return server.InternalError(err)
 	}
-	if count > 0 {
-		return router.NotAuthorizedError(err, "User already exists", "Sorry, a user already exists with that name, please choose another.")
+	if len(duplicates) > 0 {
+		return server.Redirect(w, r, "/users/create?error=duplicate_name")
 	}
+
+	// Email is optional, so allow blank email and don't check duplicates if so
+	if email != "" {
+		duplicates, err = users.FindAll(users.Where("email=?", email))
+		if err != nil {
+			return server.InternalError(err)
+		}
+		if len(duplicates) > 0 {
+			return server.Redirect(w, r, "/users/create?error=duplicate_email")
+		}
+	}
+
+	// Set the password hash from the password
+	hash, err := auth.HashPassword(pass)
+	if err != nil {
+		return server.InternalError(err)
+	}
+	params.SetString("password_hash", hash)
+
+	// Validate the params, removing any we don't accept
+	userParams := user.ValidateParams(params.Map(), users.AllowedParams())
 
 	// Set some defaults for the new user
-	params.SetInt("status", status.Published)
-	params.SetInt("role", users.RoleReader)
-	params.SetInt("points", 1)
+	userParams["status"] = fmt.Sprintf("%d", status.Published)
+	userParams["role"] = fmt.Sprintf("%d", users.Reader)
+	userParams["points"] = "1"
 
-	// Now try to create the user - NB AllowedParamsAdmin, we allow points etc on create as we explicitly set them
-	id, err := users.Create(params.Clean(users.AllowedParamsAdmin()))
+	id, err := user.Create(userParams)
 	if err != nil {
-		return router.InternalError(err, "Error", "Sorry, an error occurred creating the user record.")
+		return server.InternalError(err)
 	}
 
-	context.Logf("#info Created user id,%d", id)
-
-	// Find the user again so we can save login
-	user, err := users.Find(id)
+	// Redirect to the new user
+	user, err = users.Find(id)
 	if err != nil {
-		context.Logf("#error parsing user id: %s", err)
-		return router.NotFoundError(err)
+		return server.InternalError(err)
 	}
 
-	// Save the fact user is logged in to session cookie
-	err = loginUser(context, user)
+	// Log in automatically as the new user they have just created
+	session, err := auth.Session(w, r)
 	if err != nil {
-		return router.InternalError(err)
+		log.Info(log.V{"msg": "login failed", "email": user.Email, "user_id": user.ID, "status": http.StatusInternalServerError})
 	}
 
-	// Redirect to root
-	return router.Redirect(context, "/?message=welcome")
+	// Success, log it and set the cookie with user id
+	session.Set(auth.SessionUserKey, fmt.Sprintf("%d", user.ID))
+	session.Save(w)
+
+	// Log action
+	log.Info(log.V{"msg": "login success", "user_email": user.Email, "user_id": user.ID})
+
+	return server.Redirect(w, r, "/")
 }

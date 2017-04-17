@@ -1,77 +1,86 @@
 package storyactions
 
 import (
-	"github.com/fragmenta/router"
+	"net/http"
+
+	"github.com/fragmenta/auth/can"
+	"github.com/fragmenta/mux"
+	"github.com/fragmenta/server"
 	"github.com/fragmenta/view"
 
-	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
-const (
-	gravity = 1.8
-)
+// HandleUpdateShow renders the form to update a story.
+func HandleUpdateShow(w http.ResponseWriter, r *http.Request) error {
 
-// HandleUpdateShow renders the form to update a story
-func HandleUpdateShow(context router.Context) error {
+	// Fetch the  params
+	params, err := mux.Params(r)
+	if err != nil {
+		return server.InternalError(err)
+	}
 
 	// Find the story
-	story, err := stories.Find(context.ParamInt("id"))
+	story, err := stories.Find(params.GetInt(stories.KeyName))
 	if err != nil {
-		return router.NotFoundError(err)
+		return server.NotFoundError(err)
 	}
 
 	// Authorise update story
-	err = authorise.Resource(context, story)
+	currentUser := session.CurrentUser(w, r)
+	err = can.Update(story, currentUser)
 	if err != nil {
-		return router.NotAuthorizedError(err)
+		return server.NotAuthorizedError(err)
 	}
 
 	// Render the template
-	view := view.New(context)
+	view := view.NewRenderer(w, r)
 	view.AddKey("story", story)
-
+	view.AddKey("currentUser", currentUser)
 	return view.Render()
 }
 
 // HandleUpdate handles the POST of the form to update a story
-func HandleUpdate(context router.Context) error {
+func HandleUpdate(w http.ResponseWriter, r *http.Request) error {
+
+	// Fetch the  params
+	params, err := mux.Params(r)
+	if err != nil {
+		return server.InternalError(err)
+	}
 
 	// Find the story
-	story, err := stories.Find(context.ParamInt("id"))
+	story, err := stories.Find(params.GetInt(stories.KeyName))
 	if err != nil {
-		return router.NotFoundError(err)
+		return server.NotFoundError(err)
+	}
+
+	// Check the authenticity token
+	err = session.CheckAuthenticity(w, r)
+	if err != nil {
+		return err
 	}
 
 	// Authorise update story
-	err = authorise.ResourceAndAuthenticity(context, story)
+	currentUser := session.CurrentUser(w, r)
+	err = can.Update(story, currentUser)
 	if err != nil {
-		return router.NotAuthorizedError(err)
-	}
-
-	// Update the story from params
-	params, err := context.Params()
-	if err != nil {
-		return router.InternalError(err)
+		return server.NotAuthorizedError(err)
 	}
 
 	// Clean params according to role
 	accepted := stories.AllowedParams()
-	if authorise.CurrentUser(context).Admin() {
+	if currentUser.Admin() {
 		accepted = stories.AllowedParamsAdmin()
 	}
-	cleanedParams := params.Clean(accepted)
+	storyParams := story.ValidateParams(params.Map(), accepted)
 
-	err = story.Update(cleanedParams)
+	err = story.Update(storyParams)
 	if err != nil {
-		return err // Create returns a router.Error
-	}
-
-	err = updateStoriesRank()
-	if err != nil {
-		return router.InternalError(err)
+		return server.InternalError(err)
 	}
 
 	// Redirect to story
-	return router.Redirect(context, story.URLShow())
+	return server.Redirect(w, r, story.ShowURL())
 }

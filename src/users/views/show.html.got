@@ -1,10 +1,10 @@
 <section class="user padded">
 
   <div class="actions">
-    {{ if .current_user.Admin }}
-     <a href="/users/{{.user.Id}}/update" class="button grey">edit</a>
+    {{ if .currentUser.Admin }}
+     <a href="/users/{{.user.ID}}/update" class="button grey">edit</a>
     {{end }}
-    {{ if eq .current_user.Id .user.Id }}
+    {{ if .currentUser  }}<!-- // eq .currentUser.ID .user.ID -->
       <a class="button grey" href="/users/logout" method="post">Logout</a>
     {{ end }}
   </div>
@@ -22,9 +22,9 @@
 
 {{ $0 := . }}
 
-<section class="row user_activity">
+<section class="container  user_activity">
 
-  <div class="six columns">
+  <div class="column">
   <ul class="stories">
     {{ range .stories }}
        {{ set $0 "story" . }}
@@ -33,7 +33,7 @@
   </ul>
   </div>  
   
-  <div class="six columns">
+  <div class="column">
   <ul class="comments">
     {{ range .comments }}
        {{ set $0 "comment" . }}

@@ -2,8 +2,12 @@ package commentactions
 
 import (
 	"fmt"
+	"net/http"
 
-	"github.com/fragmenta/router"
+	"github.com/fragmenta/auth/can"
+	"github.com/fragmenta/mux"
+	"github.com/fragmenta/server"
+	"github.com/fragmenta/server/log"
 	"github.com/fragmenta/view"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
@@ -11,104 +15,123 @@ import (
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 
-// HandleCreateShow serves the create form via GET for comments
-func HandleCreateShow(context router.Context) error {
+// HandleCreateShow serves the create form via GET for comments.
+func HandleCreateShow(w http.ResponseWriter, r *http.Request) error {
+
+	comment := comments.New()
 
 	// Authorise
-	err := authorise.Path(context)
+	err := can.Create(comment, session.CurrentUser(w, r))
 	if err != nil {
-		return router.NotAuthorizedError(err)
+		return server.NotAuthorizedError(err)
 	}
 
 	// Render the template
-	view := view.New(context)
-	comment := comments.New()
+	view := view.NewRenderer(w, r)
 	view.AddKey("comment", comment)
-
-	// TODO: May have to validate parent_id or story_id
-	view.AddKey("story_id", context.ParamInt("story_id"))
-	view.AddKey("parent_id", context.ParamInt("parent_id"))
-
 	return view.Render()
 }
 
 // HandleCreate handles the POST of the create form for comments
-func HandleCreate(context router.Context) error {
+func HandleCreate(w http.ResponseWriter, r *http.Request) error {
 
-	// Authorise csrf token
-	err := authorise.AuthenticityToken(context)
+	comment := comments.New()
+
+	// Check the authenticity token
+	err := session.CheckAuthenticity(w, r)
 	if err != nil {
-		return router.NotAuthorizedError(err)
+		return err
+	}
+
+	// Authorise
+	currentUser := session.CurrentUser(w, r)
+	err = can.Create(comment, currentUser)
+	if err != nil {
+		return server.NotAuthorizedError(err)
 	}
 
 	// Check permissions - if not logged in and above 0 points, redirect
-	if !authorise.CurrentUser(context).CanComment() {
-		return router.NotAuthorizedError(nil, "Sorry", "You need to be registered and have more than 0 points to comment.")
+	if !currentUser.CanComment() {
+		return server.NotAuthorizedError(nil, "Sorry", "You need to be registered and have more than 0 points to comment.")
 	}
 
-	// Setup context
-	params, err := context.Params()
+	// Get Params
+	params, err := mux.Params(r)
 	if err != nil {
-		return router.InternalError(err)
+		return server.InternalError(err)
+	}
+
+	text := params.Get("text")
+
+	// Disallow empty comments
+	if len(text) < 5 {
+		return server.NotAuthorizedError(nil, "Comment too short", "Your comment is too short. Please try to post substantive comments which others will find useful.")
+	}
+
+	// Disallow comments which are too long
+	if len(text) > 5000 {
+		return server.NotAuthorizedError(nil, "Comment too long", "Your comment is too long.")
 	}
 
 	// Find parent story - this must exist
 	story, err := stories.Find(params.GetInt("story_id"))
 	if err != nil {
-		return router.NotFoundError(err)
+		return server.NotFoundError(err)
 	}
 
-	params.SetInt("story_id", story.Id)
-	params.Set("story_name", story.Name)
+	// Clean params according to role
+	accepted := comments.AllowedParams()
+	if currentUser.Admin() {
+		accepted = comments.AllowedParamsAdmin()
+	}
+	commentParams := comment.ValidateParams(params.Map(), accepted)
 
-	// Set a few params
-	user := authorise.CurrentUser(context)
-	params.SetInt("user_id", user.Id)
-	params.Set("user_name", user.Name)
-	params.SetInt("points", 1)
-
-	// Find the parent and set dotted id
+	// Find the parent to set dotted id
 	// these are of the form xx.xx. with a trailing dot
 	// this saves us from saving twice on create
-	parentID := context.ParamInt("parent_id")
+	parentID := params.GetInt("parent_id")
 	if parentID > 0 {
-		parent, err := comments.Find(parentID)
-		if err != nil {
-			return router.NotFoundError(err)
+
+		parent, e := comments.Find(parentID)
+		if e != nil {
+			return server.NotFoundError(err)
 		}
-		context.Logf("PARENT:%d - %s", parent.Id, parent.DottedIds)
-		params.Set("dotted_ids", fmt.Sprintf(parent.DottedIds+"."))
+		commentParams["dotted_ids"] = fmt.Sprintf(parent.DottedIDs + ".")
 	}
 
-	// Clean params allowing all through (since we have manually reset them above)
-	accepted := comments.AllowedParamsAdmin()
-	cleanedParams := params.Clean(accepted)
-	id, err := comments.Create(cleanedParams)
+	// Set other params from story/user details
+	commentParams["story_id"] = fmt.Sprintf("%d", story.ID)
+	commentParams["story_name"] = story.Name
+	commentParams["user_id"] = fmt.Sprintf("%d", currentUser.ID)
+	commentParams["user_name"] = currentUser.Name
+	commentParams["points"] = "1"
+
+	ID, err := comment.Create(commentParams)
 	if err != nil {
-		return router.InternalError(err)
+		return server.InternalError(err)
 	}
 
-	// Log creation
-	context.Logf("#info Created comment id,%d", id)
+	// Log comment creation
+	log.Info(log.Values{"msg": "Created comment", "comment_id": ID, "params": commentParams})
 
 	// Update the story comment count
 	storyParams := map[string]string{"comment_count": fmt.Sprintf("%d", story.CommentCount+1)}
 	err = story.Update(storyParams)
 	if err != nil {
-		return router.InternalError(err, "Error", "Could not update story.")
+		return server.InternalError(err, "Error", "Could not update story.")
 	}
 
 	// Redirect to the new comment
-	m, err := comments.Find(id)
+	comment, err = comments.Find(ID)
 	if err != nil {
-		return router.InternalError(err)
+		return server.InternalError(err)
 	}
 
 	// Re-rank comments on this story
-	err = updateCommentsRank(m.StoryId)
+	err = updateCommentsRank(comment.StoryID)
 	if err != nil {
 		return err
 	}
 
-	return router.Redirect(context, m.URLStory())
+	return server.Redirect(w, r, comment.StoryURL())
 }
