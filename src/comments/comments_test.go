@@ -4,7 +4,7 @@ package comments
 import (
 	"testing"
 
-	"github.com/kennygrant/gohackernews/src/lib/resource"
+	"github.com/gnoirzox/gohackernews/src/lib/resource"
 )
 
 var testName = "foo"

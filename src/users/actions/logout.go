@@ -6,7 +6,7 @@ import (
 	"github.com/fragmenta/auth"
 	"github.com/fragmenta/server"
 
-	"github.com/kennygrant/gohackernews/src/lib/session"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 )
 
 // HandleLogout clears the current user's session /users/logout

@@ -3,7 +3,7 @@ package sendgrid
 import (
 	"testing"
 
-	"github.com/kennygrant/gohackernews/src/lib/mail"
+	"github.com/gnoirzox/gohackernews/src/lib/mail"
 )
 
 // TestSendGrid tests we can create a new sendgrid connection

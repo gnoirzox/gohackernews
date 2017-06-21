@@ -5,8 +5,8 @@ import (
 
 	"github.com/fragmenta/query"
 
-	"github.com/kennygrant/gohackernews/src/lib/resource"
-	"github.com/kennygrant/gohackernews/src/lib/status"
+	"github.com/gnoirzox/gohackernews/src/lib/resource"
+	"github.com/gnoirzox/gohackernews/src/lib/status"
 )
 
 const (

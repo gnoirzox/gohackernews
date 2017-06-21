@@ -15,7 +15,7 @@ import (
 	"github.com/fragmenta/server/log"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/lib/helpers"
+	"github.com/gnoirzox/gohackernews/src/lib/helpers"
 )
 
 // This file contains some test helpers for resources.

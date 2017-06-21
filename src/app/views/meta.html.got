@@ -12,7 +12,7 @@
 <link rel="alternate" type="application/rss+xml" title="{{ .meta_title }}" href="{{ .meta_rss }}">
 {{ end }}
 
-<meta name="twitter:site" content="@golangnews" />
+<meta name="twitter:site" content="@cityhackers" />
 <meta name="twitter:title" content="{{ .meta_title }}">
 <meta name="twitter:description" content="{{ .meta_desc }}">
 {{ if and .story .story.YouTube -}}

@@ -12,8 +12,8 @@ import (
 	"github.com/fragmenta/mux"
 	"github.com/fragmenta/query"
 
-	"github.com/kennygrant/gohackernews/src/lib/resource"
-	"github.com/kennygrant/gohackernews/src/users"
+	"github.com/gnoirzox/gohackernews/src/lib/resource"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // names is used to test setting and getting the first string field of the user.
