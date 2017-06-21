@@ -6,7 +6,7 @@ import (
 
 	// Resource Actions
 	"github.com/gnoirzox/gohackernews/src/comments/actions"
-	"github.com/gnoirzox/gohackernews/src/lib/stats"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/stories/actions"
 	"github.com/gnoirzox/gohackernews/src/users/actions"
 )

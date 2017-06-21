@@ -4,7 +4,7 @@ import (
 	"github.com/fragmenta/query"
 	"github.com/fragmenta/view/helpers"
 
-	"github.com/kennygrant/gohackernews/src/lib/resource"
+	"github.com/gnoirzox/gohackernews/src/lib/resource"
 )
 
 // This file contains functions related to authorisation and roles.

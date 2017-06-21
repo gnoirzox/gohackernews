@@ -11,7 +11,7 @@ import (
 	"github.com/fragmenta/view"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
-	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 

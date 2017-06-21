@@ -6,8 +6,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fragmenta/query"
-
 	"github.com/gnoirzox/gohackernews/src/lib/resource"
 	"github.com/gnoirzox/gohackernews/src/lib/status"
 )

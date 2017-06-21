@@ -4,8 +4,8 @@ package users
 import (
 	"time"
 
+	"github.com/gnoirzox/gohackernews/src/lib/resource"
 	"github.com/gnoirzox/gohackernews/src/lib/status"
-	"github.com/gnoirzoxgohackernews/src/lib/resource"
 )
 
 // User handles saving and retreiving users from the database

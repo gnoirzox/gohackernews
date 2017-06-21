@@ -8,7 +8,7 @@ import (
 	"github.com/fragmenta/mux"
 	"github.com/fragmenta/server/log"
 
-	"github.com/kennygrant/gohackernews/src/users"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // CurrentUser returns the saved user (or an empty anon user)

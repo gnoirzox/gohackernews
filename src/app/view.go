@@ -9,7 +9,7 @@ import (
 	"github.com/fragmenta/server/log"
 	"github.com/fragmenta/view"
 
-	"github.com/kennygrant/gohackernews/src/lib/helpers"
+	"github.com/gnoirzox/gohackernews/src/lib/helpers"
 )
 
 // SetupAssets compiles or copies our assets from src into the public assets folder.

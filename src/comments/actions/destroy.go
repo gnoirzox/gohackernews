@@ -8,7 +8,7 @@ import (
 	"github.com/fragmenta/server"
 
 	"github.com/gnoirzox/gohackernews/src/comments"
-	"github.com/gnoirzox/gohackernews/src/lib/authorise"
+	"github.com/gnoirzox/gohackernews/src/lib/session"
 )
 
 // HandleDestroy responds to /comments/n/destroy by deleting the comment.

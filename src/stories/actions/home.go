@@ -50,7 +50,7 @@ func HandleHome(w http.ResponseWriter, r *http.Request) error {
 	view.AddKey("page", page)
 	view.AddKey("stories", results)
 	view.AddKey("pubdate", storiesModTime(results))
-	view.AddKey("meta_title", fmt.Sprintf("%s, %s", context.Config("meta_title"), context.Config("meta_desc")))
+	view.AddKey("meta_title", fmt.Sprintf("%s, %s", config.Get("meta_title"), config.Get("meta_desc")))
 	view.AddKey("meta_desc", config.Get("meta_desc"))
 	view.AddKey("meta_keywords", config.Get("meta_keywords"))
 	view.AddKey("meta_rss", storiesXMLPath(w, r))

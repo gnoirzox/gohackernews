@@ -9,7 +9,7 @@ import (
 	"github.com/fragmenta/auth/can"
 	"github.com/fragmenta/server/config"
 
-	"github.com/kennygrant/gohackernews/src/users"
+	"github.com/gnoirzox/gohackernews/src/users"
 )
 
 // TestRouter tests our routes are functioning correctly.
