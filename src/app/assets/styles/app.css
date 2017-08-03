@@ -33,11 +33,11 @@ h3 {
 }
 
 h1 {
-    color: #05afe7;
+    color: #4d4d4d;
 }
 
 h2 {
-    color: #05afe7;
+    color: #4d4d4d;
     font-size: 1.6em;
     margin: 2rem 0 0.5rem 0;
 }
@@ -105,7 +105,7 @@ code {
 button, 
 input[type="submit"], input[type="reset"], input[type="button"]{
     color: #fff;
-    background-color: #05afe7;
+    background-color: #4d4d4d;
     border: none;
     border-radius: 0.25rem;
     font-size: 1em;
@@ -188,8 +188,7 @@ ul.inline li {
 
 header,
 footer {
-    background-color: #ff6600;
-    background-color: #0ab1e8;
+    background-color: #4d4d4d;
     border: none;
     margin: 0;
     padding: 0;
@@ -256,7 +255,7 @@ header nav ul li {
 
 header .title .logo {
     font-size: 1.3em;
-    text-shadow: -0.25rem 0.25rem 0 rgba(10, 134, 174, 0.5);
+    text-shadow: -0.25rem 0.25rem 0 #262626;
     font-weight: 600;
     margin: 0.2rem 0 0 0;
     position: relative;
