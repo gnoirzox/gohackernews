@@ -33,12 +33,11 @@ h3 {
 }
 
 h1 {
-  //color: #05afe7;
   color: #000;
 }
 
 h2 {
-    color: #05afe7;
+    color: #4d4d4d;
     font-size: 1.6em;
     margin: 2rem 0 0.5rem 0;
 }
@@ -102,15 +101,21 @@ code {
     text-align: center;
 }
 
-.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
-  color: #fff;
-  background-color: #000;
-  border: none;
-  font-size: 1em;
-  font-weight: 300;
-  height: 3rem;
-  line-height: 3rem;
-  padding: 0rem 1rem;
+.button,
+button, 
+input[type="submit"], input[type="reset"], input[type="button"]{
+    color: #fff;
+    background-color: #4d4d4d;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 1.7rem;
+    padding: 0.3rem 0.6rem;
+    display: inline-block;
+    cursor: pointer;
+    letter-spacing: 0.1rem;
 }
 
 .button:hover,
@@ -181,13 +186,13 @@ ul.inline li {
     margin: 0 0 0.2rem 0;
 }
 
-header, footer {
-  background-color: #ff6600;
-  background-color: #000;
-  border: none;
-  margin:0;
-  padding:0;
-  color: #fff;
+header,
+footer {
+    background-color: #4d4d4d;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #fff;
 }
 
 footer a {
@@ -254,7 +259,7 @@ header nav ul li {
 
 header .title .logo {
     font-size: 1.3em;
-    text-shadow: -0.25rem 0.25rem 0 rgba(10, 134, 174, 0.5);
+    text-shadow: -0.25rem 0.25rem 0 #262626;
     font-weight: 600;
     margin: 0.2rem 0 0 0;
     position: relative;

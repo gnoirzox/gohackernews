@@ -3,7 +3,7 @@
   <a href="{{ .meta_rss }}">RSS</a> |
   {{ end }}
   <a href="https://twitter.com/cityh4ck3rs">Twitter</a> |
-  <a href="https://github.com/kennygrant/gohackernews">Source on Github</a> | 
+  <a href="https://github.com/gnoirzox/gohackernews">Source on Github</a> | 
   <a href="http://fragmenta.eu">Made with Fragmenta</a> |
   <a href='javascript:window.location="https://golangnews.com/stories/create?u="+encodeURIComponent(document.location)+"&n="+encodeURIComponent(document.title)+"&s="+encodeURIComponent(document.querySelector("meta[name=description]").content)'>Bookmarklet (drag to bookmarks)</a>
       {{if .meta_rss }} |
@@ -11,5 +11,5 @@
       {{ end }}
 </p>
 <p>
-  This site uses <a href="https://nginx.com">Nginx</a>, <a href="https://golang.org">Golang</a> and is hosted on <a href="https://clever-cloud.com/">Clever Cloud</a>. This website is based on <a href="https://golangnews.com/">Golang-News's</a> <a href="https://github.com/kennygrant/gohackernews">source-code</a>.
+  This site uses <a href="https://golang.org">Golang</a> and is hosted on <a href="https://linode.com/">Linode</a>. This website is based on <a href="https://golangnews.com/">Golang-News's</a> <a href="https://github.com/kennygrant/gohackernews">source-code</a>.
 </p>

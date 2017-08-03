@@ -43,12 +43,14 @@
     <li><a title="Newest articles about the London TechCity" href="/stories">New</a></li>
     <li><a title="A place to show CN your stuff" href="/stories?q=Show:">Show</a></li>
     <li><a title="Ask techcity news" href="/stories?q=Ask:">Ask</a></li>
+    <li><a title="Stories you have upvoted in the past" href="/stories/upvoted">Upvoted</a></li>
     <li><a href="/comments">Talk</a></li>
-    {{ if not .current_user.Anon }}
-    <li class="submit"><a href="/stories/create" title="Submit links about the London TechCity">Submit</a></li>
-    {{ else }}
+
+	{{ if .currentUser.Anon }}
      <li class="submit"><a class="register" href="/users/create">Sign up</a></li>
      <li class="submit"><a class="register" href="/users/login">Log in</a></li>
+    {{ else if not .hideSubmit }}
+     <li class="submit"><a href="/stories/create" title="Submit links about the London TechCity">Submit</a></li>
     {{ end }}
     
     
