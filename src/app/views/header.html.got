@@ -3,7 +3,7 @@
   
     <li class="user_badge" >
       {{ if and .currentUser (not .currentUser.Anon) }}
-        <a href="/users/{{.current_user.Id}}">{{.current_user.Name}} ({{.current_user.Points}}) {{ if .userCount}} - {{.userCount}} users online{{end}}</a>
+        <a href="/users/{{.currentUser.ID}}">{{.currentUser.Name}} ({{.currentUser.Points}}) {{ if .userCount}} - {{.userCount}} users online{{end}}</a>
       {{ else }}
         <h3 class="hidden">CityHackers News, Curated links and news about the London TechCity</h3>
         <span class="short">CityHackers News {{ if .userCount}}- {{.userCount}} users online{{end}}</span>
