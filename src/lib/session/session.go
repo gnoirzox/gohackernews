@@ -21,7 +21,7 @@ func CurrentUser(w http.ResponseWriter, r *http.Request) *users.User {
 	// Build the session from the secure cookie, or create a new one
 	session, err := auth.Session(w, r)
 	if err != nil {
-		//log.Info(log.V{"msg": "session error", "error": err, "status": http.StatusInternalServerError})
+		log.Info(log.V{"msg": "session error", "error": err, "status": http.StatusInternalServerError})
 		return user
 	}
 
@@ -31,7 +31,7 @@ func CurrentUser(w http.ResponseWriter, r *http.Request) *users.User {
 
 	// If we have no value, we have no login
 	if len(val) == 0 {
-		//log.Info(log.V{"msg": "session error", "session": session, "status": http.StatusInternalServerError})
+		log.Info(log.V{"msg": "session error", "session": session, "status": http.StatusInternalServerError})
 		return user
 	}
 

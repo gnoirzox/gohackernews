@@ -51,7 +51,7 @@ func (s *Story) Domain() string {
 		return s.URL
 	}
 
-	return "GN"
+	return "CH"
 }
 
 // ShowAsk returns true if this is a Show: or Ask: story
