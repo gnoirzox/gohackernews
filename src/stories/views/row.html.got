@@ -24,7 +24,7 @@
             <li><a href="/stories?q=%23{{.}}">{{.}}</a></li>
           {{ end }}
       </ul>
-        <a href="{{.story.DestinationURL}}" class="domain">{{ .story.Domain }}</a>
+        <a href="/stories?q={{ .story.Domain }}" class="domain">{{ .story.Domain }}</a>
         
         <a href="/users/{{.story.UserID}}" class="user">{{.story.UserName}}</a>
         <a href="{{.story.CanonicalURL}}" class="date">{{timeago .story.CreatedAt}}</a>

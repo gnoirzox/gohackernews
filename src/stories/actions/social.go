@@ -10,7 +10,6 @@ import (
 	"github.com/fragmenta/server/log"
 
 	"github.com/gnoirzox/gohackernews/src/lib/twitter"
-
 	"github.com/gnoirzox/gohackernews/src/stories"
 )
 

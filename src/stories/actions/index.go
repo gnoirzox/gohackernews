@@ -92,10 +92,6 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) error {
 	}
 
 	windowTitle := config.Get("meta_title")
-	switch filter {
-	case "Video:":
-		windowTitle = "Golang Videos"
-	}
 
 	// Render the template
 	view := view.NewRenderer(w, r)

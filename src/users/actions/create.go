@@ -13,7 +13,6 @@ import (
 
 	"github.com/gnoirzox/gohackernews/src/lib/session"
 	"github.com/gnoirzox/gohackernews/src/lib/status"
-
 	"github.com/gnoirzox/gohackernews/src/users"
 )
 
