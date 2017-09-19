@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/fragmenta/server/config"
-	"github.com/kennygrant/gohackernews/src/lib/twitter"
-	"github.com/kennygrant/gohackernews/src/stories/actions"
+	"github.com/gnoirzox/gohackernews/src/lib/twitter"
+	"github.com/gnoirzox/gohackernews/src/stories/actions"
 )
 
 // SetupServices sets up external services from our config file

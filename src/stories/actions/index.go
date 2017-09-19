@@ -108,7 +108,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) error {
 	view.AddKey("meta_rss", storiesXMLPath(w, r))
 	view.AddKey("currentUser", session.CurrentUser(w, r))
 
-	if context.Param("format") == ".xml" {
+	if strings.HasSuffix(r.URL.Path, ".xml") {
 		view.Layout("")
 		view.Template("stories/views/index.xml.got")
 	}
