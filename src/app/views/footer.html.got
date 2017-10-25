@@ -5,7 +5,7 @@
   <a href="https://twitter.com/cityh4ck3rs">Twitter</a> |
   <a href="https://github.com/gnoirzox/gohackernews">Source on Github</a> | 
   <a href="http://fragmenta.eu">Made with Fragmenta</a> |
-  <a href='javascript:window.location="https://golangnews.com/stories/create?u="+encodeURIComponent(document.location)+"&n="+encodeURIComponent(document.title)+"&s="+encodeURIComponent(document.querySelector("meta[name=description]").content)'>Bookmarklet (drag to bookmarks)</a>
+  <a href='javascript:window.location="https://cityhacke.rs/stories/create?u="+encodeURIComponent(document.location)+"&n="+encodeURIComponent(document.title)+"&s="+encodeURIComponent(document.querySelector("meta[name=description]").content)'>Bookmarklet (drag to bookmarks)</a>
       {{if .meta_rss }} |
       <a href="{{ .meta_rss }}">RSS</a>
       {{ end }}
