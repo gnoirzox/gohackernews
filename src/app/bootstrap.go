@@ -106,6 +106,10 @@ func generateConfig(projectPath string) error {
 		"path":            projectPathRelative(projectPath),
 		"hmac_key":        randomKey(32),
 		"secret_key":      randomKey(32),
+		"session_name":    prefix + "_session",
+		"meta_title":      "",
+		"meta_desc":       "",
+		"meta_keywords":   "",
 	}
 
 	// Check if the psql binary is available, if not, assume the worst
