@@ -1,7 +1,7 @@
-# Golang News
-A responsive news website for links about the Go programming language, written in Go. You can see a this website in action at this link:
+# City-Hackers
+A responsive news website for links about the London startup scene, written in Go. You can see a this website in action at this link:
 
-[http://golangnews.com](http://golangnews.com)
+[https://cityhacke.rs](http://cityhacke.rs)
 
 ## Gettting Started
 
